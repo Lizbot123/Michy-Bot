@@ -7,6 +7,17 @@ import fetch from 'node-fetch';
 import axios from 'axios';
 import moment from 'moment-timezone';
 
+global.botnumber = ""
+global.confirmCode = ""
+global.authFile = `MysticSession`;
+
+// Cambiar a true si el Bot responde a sus comandos con otros comandos.
+// Cambiar a false para usar el Bot desde el mismo numero del Bot.
+// Error de m.isBaileys marcado como false fix temporal
+global.isBaileysFail = false
+
+global.defaultLenguaje = 'es';
+
 global.owner = [
   ['5215641961070', '👑 Mystic - Creador 👑', true],
   ['5219531627349','💫 Mystic 💫', true]
