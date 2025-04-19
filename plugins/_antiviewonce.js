@@ -1,19 +1,16 @@
 let { downloadContentFromMessage } = (await import('@whiskeysockets/baileys'));
 
-export async function before(m, { isAdmin, isBotAdmin }) {
- 
-let chat = db.data.chats[m.chat]
-if (/^[.~#/\$,](read)?viewonce/.test(m.text)) return
-if (!chat.antiviewonce || chat.isBanned) return
-if (m.mtype == 'viewOnceMessageV2') {
-let msg = m.message.viewOnceMessageV2.message
-let type = Object.keys(msg)[0]
-let media = await downloadContentFromMessage(msg[type], type == 'imageMessage' ? 'image' : 'video')
-let buffer = Buffer.from([])
-for await (const chunk of media) {
-buffer = Buffer.concat([buffer, chunk])}
-if (/video/.test(type)) {
-return this.sendFile(m.chat, buffer, 'error.mp4', `${msg[type].caption}\n\nNon si nasconde nulla`, m)
-} else if (/image/.test(type)) {
-return this.sendFile(m.chat, buffer, 'error.jpg', `${msg[type].caption}\n\nNon si nasconde nulla`, m)
-}}}
+let handler = async (m, { conn }) => {
+if (!m.quoted) return conn.reply(m.chat, `🍬 Responde a una imagen ViewOnce.`, m)
+if (!m?.quoted || !m?.quoted?.viewOnce) return conn.reply(m.chat, `🍬 Responde a una imagen ViewOnce.`, m)
+let buffer = await m.quoted.download(false);
+if (/videoMessage/.test(m.quoted.mtype)) {
+return conn.sendFile(m.chat, buffer, 'media.mp4', m.quoted.caption || '', m)
+} else if (/imageMessage/.test(m.quoted.mtype)) {
+return conn.sendFile(m.chat, buffer, 'media.jpg', m.quoted?.caption || '', m)
+}}
+handler.help = ['antiviewonce']
+handler.tags = ['tools']
+handler.command = ['ver', 'antiviewonce'] 
+
+export default handler
