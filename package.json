@@ -37,7 +37,6 @@
     "@vitalets/google-translate-api": "^8.0.0",
     "@whiskeysockets/baileys": "github:ds6/bails",
     "@google/generative-ai": "0.1.3",
-    "@xct007/frieren-scraper": "*",
     "esm": "^3.2.25",
     "acrcloud": "^1.4.0",
     "api-dylux": "^1.6.2",
