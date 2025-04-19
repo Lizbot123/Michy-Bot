@@ -71,7 +71,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const videoInfo = search.all[0];
     const { title, thumbnail, timestamp, views, ago, url } = videoInfo;
     const vistas = formatViews(views);
-    const infoMessage = *◉——⌈🔊 YOUTUBE PLAY 🔊⌋——◉*
+    const infoMessage = "*◉——⌈🔊 YOUTUBE PLAY 🔊⌋——◉*
 ❏ 📌 *Título:* ${title}
 ❏ 📆 *Publicado:* ${ago}
 ❏ ⌚ *Duración:* ${timestamp}
@@ -81,7 +81,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 ❏ 🆔 *ID:* ${videoInfo.videoId}
 ❏ 🪬 *Tipo:* ${videoInfo.type}
 ❏ 🔗 *Link:* ${url}
-❏ *_Enviando ${additionalText}, aguarde un momento．．．_*
+❏ *_Enviando ${additionalText}, aguarde un momento．．．_*";
     const thumb = (await conn.getFile(thumbnail))?.data;
 
     const JT = {
